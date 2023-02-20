@@ -8,11 +8,13 @@
  *  @license https://github.com/openemr/openemr/blob/master/LICENSE GNU General Public License 3
  */
 
-use OpenEMR\Rx\Weno\Container;
+use OpenEMR\Rx\Weno\LogProperties;
 
+/**
+ * @throws Exception
+ */
 function start_weno()
 {
-    $container = new Container();
-    $logsync = $container->getLogproperties();
+    $logsync = new LogProperties();
     $logsync->logSync();
 }
