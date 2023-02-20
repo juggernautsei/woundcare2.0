@@ -31,18 +31,15 @@ class TransmitProperties
      */
     public function __construct()
     {
-        //check that the backgroundservices in running
-        $service = new WenoPharmaciesJson();
-        $service->checkBackgroundServices();
              $this->cryptoGen = new CryptoGen();
-                 //$this->ncpdp = $this->getPharmacy();
-                //$this->vitals = $this->getVitals();
-               //$this->patient = $this->getPatientInfo();
-        //$this->provider_email = $this->getProviderEmail();
-         //$this->provider_pass = $this->getProviderPassword();
-                 //$this->locid = $this->getFacilityInfo();
-               //$this->payload = $this->createJsonObject();
-            //$this->subscriber = $this->getSubscriber();
+                 $this->ncpdp = $this->getPharmacy();
+                $this->vitals = $this->getVitals();
+               $this->patient = $this->getPatientInfo();
+        $this->provider_email = $this->getProviderEmail();
+         $this->provider_pass = $this->getProviderPassword();
+                 $this->locid = $this->getFacilityInfo();
+               $this->payload = $this->createJsonObject();
+            $this->subscriber = $this->getSubscriber();
     }
 
     /**
