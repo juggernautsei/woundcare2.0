@@ -31,6 +31,8 @@ class TransmitProperties
      */
     public function __construct()
     {
+        //check that the backgroundservices in running
+        checkBackgroundServices();
              $this->cryptoGen = new CryptoGen();
                  //$this->ncpdp = $this->getPharmacy();
                 //$this->vitals = $this->getVitals();

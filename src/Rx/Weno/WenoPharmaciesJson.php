@@ -37,7 +37,7 @@ class WenoPharmaciesJson
         $url = $this->wenoPharmacyDirectoryLink() . "?useremail=" . $this->providerEmail() . "&data=" . urlencode($this->encrypted);
         $getWenoPharmaciesCsv = new DownloadWenoPharmacies();
         $storageLocation = dirname(__DIR__, 3) . "/sites/" . $_SESSION['site_id'] . "/documents/logs_and_misc/";
-        $c = $getWenoPharmaciesCsv->RetrieveDataFile($url, $storageLocation);    
+        $c = $getWenoPharmaciesCsv->RetrieveDataFile($url, $storageLocation);
     }
 
     private function buildJson()
@@ -69,11 +69,11 @@ class WenoPharmaciesJson
         return "https://online.wenoexchange.com/en/EPCS/DownloadPharmacyDirectory";
     }
 
-    public function checkBackgroundService()
+    public function checkBackgroundService(): string
     {
         $sql = "SELECT active FROM background_services WHERE name = 'WenoExchangePharmacies'";
         $activeStatus = sqlQuery($sql);
-        if ($activeStatus === 0) {
+        if ($activeStatus['active'] == 0) {
             sqlStatement("UPDATE background_service SET `active` = 1,  WHERE name = 'WenoExchangePharmacies'");
             return "active";
         }

@@ -21,8 +21,6 @@ if (!AclMain::aclCheckCore('patients', 'rx')) {
     exit;
 }
 
-
-
 $wenoProperties = new TransmitProperties();
 $provider_info = $wenoProperties->getProviderEmail();
 $urlParam = $wenoProperties->cipherPayload();          //lets encrypt the data

@@ -996,3 +996,8 @@ ALTER TABLE `module_configuration` ADD COLUMN `date_modified` DATETIME DEFAULT C
 
 #IfUpdateEditOptionsNeeded remove DEM K birth_fname, pubpid, name_history
 #EndIf
+
+#IfNotRow background_services name WenoExchangePharmacies
+INSERT INTO `background_services` (`name`, `title`, `active`, `running`, `next_run`, `execute_interval`, `function`, `require_once`, `sort_order`) VALUES
+('WenoExchangePharmacies', 'Weno Pharmacy Database Sync', 0, 0, '2021-01-18 11:25:10', 1440, 'start_weno_pharmacy_sync', '/interface/weno/wenoconnected.php', 100);
+#EndIf
