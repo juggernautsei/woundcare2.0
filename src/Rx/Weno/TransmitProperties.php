@@ -129,37 +129,37 @@ class TransmitProperties
         //get patient data if in an encounter
         //Since the transmitproperties is called in the logproperties
         //need to check to see if in an encounter or not. Patient data is not required to view the Weno log
-        if (empty($_SESSION['encounter'])) {
-            die("please select an encounter");
-        }
-        $missing = 0;
-        $patient = sqlQuery("select title, fname, lname, mname, street, state, city, email, phone_cell, postal_code, dob, sex, pid from patient_data where pid=?", [$_SESSION['pid']]);
-        if (empty($patient['fname'])) {
-            echo xlt("First Name Missing") . "<br>";
-            ++$missing;
-        }
-        if (empty($patient['lname'])) {
-            echo xlt("Last Name Missing")  . "<br>";
-            ++$missing;
-        }
-        if (empty($patient['dob'])) {
-            echo xlt("Date of Birth Missing") . "<br>";
-            ++$missing;
-        }
-        if (empty($patient['sex'])) {
-            echo xlt("Gender Missing") . "<br>";
-            ++$missing;
-        }
-        if (empty($patient['postal_code'])) {
-            echo xlt("Zip Code Missing") . "<br>";
-            ++$missing;
-        }
-        if (empty($patient['street'])) {
-            echo xlt("Street Address incomplete Missing") . "<br>";
-            ++$missing;
-        }
-        if ($missing > 0) {
-            die('Pleasae add the missing data and try again');
+        //removing the call for an encounter. Just check if in a patient chart. If in a chart check patient info
+        if ($_SESSION['pid']) {
+            $missing = 0;
+            $patient = sqlQuery("select title, fname, lname, mname, street, state, city, email, phone_cell, postal_code, dob, sex, pid from patient_data where pid=?", [$_SESSION['pid']]);
+            if (empty($patient['fname'])) {
+                echo xlt("First Name Missing") . "<br>";
+                ++$missing;
+            }
+            if (empty($patient['lname'])) {
+                echo xlt("Last Name Missing") . "<br>";
+                ++$missing;
+            }
+            if (empty($patient['dob'])) {
+                echo xlt("Date of Birth Missing") . "<br>";
+                ++$missing;
+            }
+            if (empty($patient['sex'])) {
+                echo xlt("Gender Missing") . "<br>";
+                ++$missing;
+            }
+            if (empty($patient['postal_code'])) {
+                echo xlt("Zip Code Missing") . "<br>";
+                ++$missing;
+            }
+            if (empty($patient['street'])) {
+                echo xlt("Street Address incomplete Missing") . "<br>";
+                ++$missing;
+            }
+            if ($missing > 0) {
+                die('Pleasae add the missing data and try again');
+            }
         }
         return $patient;
     }
