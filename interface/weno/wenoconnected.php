@@ -34,8 +34,7 @@ $localPharmacyJson = new WenoPharmaciesJson(
 //and the pharmacy can be selected at the time of creating the prescription.
 $value = $localPharmacyJson->checkBackgroundService();
 if ($value == 'active' || $value == 'live') {
-    $status = $localPharmacyJson->storePharmacyDataJson($transmitProperties);
-die;
+    $status = $localPharmacyJson->storePharmacyDataJson();
 } else {
     error_log('Weno Background service not active');  //This should never happen
 }

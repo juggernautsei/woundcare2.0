@@ -219,8 +219,8 @@ class TransmitProperties
 
     private function getSubscriber()
     {
-        $sql = sqlQuery("select subscriber_relationship from insurance_data where pid = ? and type = 'primary'", [$_SESSION['pid']]);
-        return $sql['subscriber_relationship'];
+        $sql = sqlQuery("select subscriber_relationship from insurance_data where pid = ? and type = 'primary'", [$_SESSION['pid'] ?? null]);
+        return $sql['subscriber_relationship'] ?? null;
     }
 
     /**

@@ -521,7 +521,9 @@ function toencounter(enc, datestr, topframe) {
                     <br />
                     <?php echo text($frow['phone']) ?>
                 </p>
-
+                <div>
+                    <img src="../../public/images/receipt-logo.png" width="100" height="75">
+                </div>
                 <div class="table-responsive">
                     <table class="table table-borderless">
                         <tr>

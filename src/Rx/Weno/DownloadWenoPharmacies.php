@@ -29,15 +29,21 @@ class DownloadWenoPharmacies
                 'Cookie: ASP.NET_SessionId=fy5zpkkeptxxf2cviwkncie2'
             ),
         ));
-
+        $status = curl_getinfo($curl);
         $response = curl_exec($curl);
 
         curl_close($curl);
-        //echo $response;
 
         $filename = "wenoPharmacyDirctory.zip";
         $directory = fopen($storelocation.$filename, 'w');
         fwrite($directory, $response);
         fclose($directory);
+        $unzip = new \ZipArchive();
+        $res = $unzip->open($storelocation.$filename);
+        if ($res === true) {
+            $unzip->extractTo($storelocation);
+            $unzip->close();
+            return 'complete';
+        }
     }
 }
