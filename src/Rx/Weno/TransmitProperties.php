@@ -55,8 +55,8 @@ class TransmitProperties
             $mode = 'N';
         }
         $gender = $this->patient['sex'] ?? null;
-        $heighDate = explode(" ", $this->vitals['date'])  ?? null;
-        if (!empty($this->patient['phone_cell'])) {
+        $heightDate = explode(" ", $this->vitals['date']);
+        if (is_array($this->patient)) {
             $phoneprimary = preg_replace('/\D+/', '', $this->patient['phone_cell']);
         }
 
@@ -83,7 +83,7 @@ class TransmitProperties
 
         $wenObj['PatientHeight'] = substr($this->vitals['height'], 0, -3);
         $wenObj['PatientWeight'] = substr($this->vitals['weight'], 0, -3);
-        $wenObj['HeightWeightObservationDate'] = $heighDate[0];
+        $wenObj['HeightWeightObservationDate'] = $heightDate[0];
         $wenObj["ResponsiblePartySameAsPatient"] = 'Y';
         $wenObj['PatientLocation'] = "Home";
         return json_encode($wenObj);
