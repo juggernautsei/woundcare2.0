@@ -111,7 +111,7 @@ function checkBackgroundServices()
 {
   //load up any necessary globals
     $bgservices = sqlStatement(
-        "SELECT gl_name, gl_index, gl_value FROM globals WHERE gl_name IN 
+        "SELECT gl_name, gl_index, gl_value FROM globals WHERE gl_name IN
         (
             'phimail_enable',
             'phimail_interval',
@@ -142,6 +142,7 @@ function checkBackgroundServices()
      */
     $wenoservices = $GLOBALS['weno_rx_enable'] == 1 ? '1' : '0';
     updateBackgroundService('WenoExchange', $wenoservices, 1);
+    updateBackgroundService('WenoExchangePharmacies', $wenoservices, 1440);
 }
 ?>
 <!DOCTYPE html>
