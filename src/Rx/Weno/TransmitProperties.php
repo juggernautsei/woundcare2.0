@@ -54,12 +54,14 @@ class TransmitProperties
         } else {
             $mode = 'N';
         }
-        $gender = $this->patient['sex'] ?? null;
+        if (is_array($this->patient)) {
+            $gender = $this->patient['sex'] ?? null;
+        }
         if (is_array($this->vitals)) {
-            $heightDate = explode(" ", $this->vitals['date']);
+            $heightDate = explode(" ", $this->vitals['date']) ?? null;
         }
         if (is_array($this->patient)) {
-            $phoneprimary = preg_replace('/\D+/', '', $this->patient['phone_cell']);
+            $phoneprimary = preg_replace('/\D+/', '', $this->patient['phone_cell']) ?? null;
         }
 
         //create json array
