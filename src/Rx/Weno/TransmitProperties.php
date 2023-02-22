@@ -54,9 +54,12 @@ class TransmitProperties
         } else {
             $mode = 'N';
         }
-        $gender = $this->patient['sex'];
-        $heighDate = explode(" ", $this->vitals['date']);
-        $phoneprimary = preg_replace('/\D+/', '', $this->patient['phone_cell']);
+        $gender = $this->patient['sex'] ?? null;
+        $heighDate = explode(" ", $this->vitals['date'])  ?? null;
+        if (!empty($this->patient['phone_cell'])) {
+            $phoneprimary = preg_replace('/\D+/', '', $this->patient['phone_cell']);
+        }
+
         //create json array
         $wenObj = [];
         $wenObj['UserEmail'] = $this->provider_email['email'];
@@ -124,13 +127,13 @@ class TransmitProperties
     /**
      * @return mixed
      */
-    private function getPatientInfo()
+    private function getPatientInfo(): void
     {
         //get patient data if in an encounter
         //Since the transmitproperties is called in the logproperties
         //need to check to see if in an encounter or not. Patient data is not required to view the Weno log
         //removing the call for an encounter. Just check if in a patient chart. If in a chart check patient info
-        if ($_SESSION['pid']) {
+        if (!empty($_SESSION['pid'])) {
             $missing = 0;
             $patient = sqlQuery("select title, fname, lname, mname, street, state, city, email, phone_cell, postal_code, dob, sex, pid from patient_data where pid=?", [$_SESSION['pid']]);
             if (empty($patient['fname'])) {
@@ -161,7 +164,6 @@ class TransmitProperties
                 die('Pleasae add the missing data and try again');
             }
         }
-        return $patient;
     }
 
     /**
