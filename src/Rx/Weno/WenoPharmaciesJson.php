@@ -45,8 +45,8 @@ class WenoPharmaciesJson
         $jobj = [
             "UserEmail" => $this->providerEmail(),
             "MD5Password" => $this->providerPassword(),
-            "ExcludeNonWenoTest" => "N",
-            "Daily" => 'Y'
+            "ExcludeNonWenoTest" => "Y",
+            "Daily" => 'N'
         ];
         return json_encode($jobj);
     }
