@@ -55,7 +55,9 @@ class TransmitProperties
             $mode = 'N';
         }
         $gender = $this->patient['sex'] ?? null;
-        $heightDate = explode(" ", $this->vitals['date']);
+        if (is_array($this->vitals)) {
+            $heightDate = explode(" ", $this->vitals['date']);
+        }
         if (is_array($this->patient)) {
             $phoneprimary = preg_replace('/\D+/', '', $this->patient['phone_cell']);
         }
