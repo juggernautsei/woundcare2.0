@@ -47,6 +47,10 @@ class TransmitProperties
      */
     public function createJsonObject()
     {
+        //Check if a patient chart is open. If not return void
+        if (empty($_SESSION['pid'])) {
+            return;
+        }
         //default is testing mode
         $testing = isset($GLOBALS['weno_rx_enable_test']);
         if ($testing) {
@@ -91,6 +95,7 @@ class TransmitProperties
         $wenObj["ResponsiblePartySameAsPatient"] = 'Y';
         $wenObj['PatientLocation'] = "Home";
         return json_encode($wenObj);
+
     }
 
     /**
