@@ -64,7 +64,7 @@ class LogProperties
     /**
      * @return string
      */
-    public function logEpcs(): string
+    public function logEpcs()
     {
         $email = $this->provider->getProviderEmail();
         $prov_pass =  $this->provider->getProviderPassword();                // gets the password stored for the
