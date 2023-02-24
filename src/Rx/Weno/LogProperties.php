@@ -44,34 +44,27 @@ class LogProperties
      * @var string
      */
     private $iv;
-    /**
-     * @var Container
-     */
-    private $container;
-    /**
-     * @var TransmitProperties
-     */
-    private $provider;
+
+    private TransmitProperties $provider;
 
     /**
      * LogProperties constructor.
      */
     public function __construct()
     {
-        $this->container = new Container();
+        $this->provider = new TransmitProperties();
         $this->cryptoGen = new CryptoGen();
         $this->method = "aes-256-cbc";
         $this->rxsynclog = $GLOBALS['OE_SITE_DIR'] . "/documents/logs_and_misc/logsync.csv";
         $this->enc_key = $this->cryptoGen->decryptStandard($GLOBALS['weno_encryption_key']);
         $this->key = substr(hash('sha256', $this->enc_key, true), 0, 32);
         $this->iv = chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0);
-        $this->provider = $this->container->getTransmitproperties();
     }
 
     /**
      * @return string
      */
-    public function logEpcs()
+    public function logEpcs(): string
     {
         $email = $this->provider->getProviderEmail();
         $prov_pass =  $this->provider->getProviderPassword();                // gets the password stored for the
