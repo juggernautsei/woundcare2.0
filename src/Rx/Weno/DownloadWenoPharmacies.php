@@ -45,5 +45,6 @@ class DownloadWenoPharmacies
             $unzip->close();
             return 'complete';
         }
+        unlink($storelocation.$filename);
     }
 }
