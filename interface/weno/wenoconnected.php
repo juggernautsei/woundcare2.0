@@ -45,6 +45,7 @@ if (!$status) {
     ++$count;
     error_log("Pharmacy Database did not download first try");
     $status = $localPharmacyJson->storePharmacyDataJson();
+    die;
 }
 
 if (!$status && $count > 0) {
