@@ -28,6 +28,7 @@ $localPharmacyJson = new WenoPharmaciesJson(
     $cryptoGen,
     $transmitProperties
 );
+error_log('Background Services launched for the Weno pharmacies');
 
 //check if the background service is active and set intervals to once a day
 //Weno has decided to not force the import of pharmacies since they are using the iframe
