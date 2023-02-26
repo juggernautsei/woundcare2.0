@@ -101,7 +101,7 @@ class TransmitProperties
     /**
      * @return mixed
      */
-    public function getProviderEmail()
+    public function getProviderEmail(): string
     {
         $provider_info = sqlQuery("select email from users where id = ? ", [5]);
         if (empty($provider_info['email'])) {
@@ -115,7 +115,7 @@ class TransmitProperties
     /**
      * @return mixed
      */
-    public function getFacilityInfo()
+    public function getFacilityInfo(): string
     {
         $locid = sqlQuery("select name, street, city, state, postal_code, phone, fax, weno_id from facility where id = ?", [$_SESSION['facilityId'] ?? null]);
 

@@ -64,7 +64,7 @@ class LogProperties
     /**
      * @return string
      */
-    public function logEpcs()
+    public function logEpcs(): string
     {
         $email = $this->provider->getProviderEmail();
         $prov_pass =  $this->provider->getProviderPassword();                // gets the password stored for the
@@ -79,7 +79,7 @@ class LogProperties
         }
 
         $p = [
-            "UserEmail" => $email['email'],
+            "UserEmail" => $email,
             "MD5Password" => $md5,
             "FromDate" => $yesterday,
             "ToDate" => $yesterday,
