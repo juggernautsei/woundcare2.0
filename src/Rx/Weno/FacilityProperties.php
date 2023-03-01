@@ -42,7 +42,7 @@ class FacilityProperties
             } catch (\Exception $e) {
                 return "An error occured " . $e->getMessage();
             }
-            return "completed";
         }
+        return "completed";
     }
 }
