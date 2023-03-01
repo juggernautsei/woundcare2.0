@@ -112,10 +112,7 @@ class TransmitProperties
         }
     }
 
-    /**
-     * @return mixed
-     */
-    public function getFacilityInfo(): string
+    public function getFacilityInfo(): mixed
     {
         $locid = sqlQuery("select name, street, city, state, postal_code, phone, fax, weno_id from facility where id = ?", [$_SESSION['facilityId'] ?? null]);
 
@@ -123,7 +120,7 @@ class TransmitProperties
             //if not in an encounter then get the first facility location id as default
             $default_facility = sqlQuery("select name, street, city, state, postal_code, phone, fax, weno_id from facility order by id asc limit 1");
 
-            if (empty($default_facility)) {
+            if (empty($default_facility['weno_id'])) {
                 echo xlt('Facility ID is missing');
                 exit;
             } else {
@@ -133,9 +130,6 @@ class TransmitProperties
         return $locid;
     }
 
-    /**
-     * @return mixed
-     */
     private function getPatientInfo(): void
     {
         //get patient data if in an encounter
@@ -235,7 +229,8 @@ class TransmitProperties
 
     public function wenoChr()
     {
-        return chr(0x0) .
+        return
+            chr(0x0) .
             chr(0x0) .
             chr(0x0) .
             chr(0x0) .
