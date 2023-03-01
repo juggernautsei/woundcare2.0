@@ -36,27 +36,9 @@ error_log('Background Services launched for the Weno pharmacies');
 $value = $localPharmacyJson->checkBackgroundService();
 if ($value == 'active' || $value == 'live') {
     $status = $localPharmacyJson->storePharmacyDataJson();
-} else {
-    error_log('Weno Background service not active');  //This should never happen
-}
-
-//Check if file downloaded and set count
-$count = 0;
-if (!$status) {
-    ++$count;
-    error_log("Pharmacy Database did not download first try");
-    $status = $localPharmacyJson->storePharmacyDataJson();
+    error_log('Weno pharmacies download complete');
     die;
 }
 
-if (!$status && $count > 0) {
-    sleep(300); //wait 5 minutes and try to download the file again.
-    $status = $localPharmacyJson->storePharmacyDataJson();
-}
-
-if (!$status) {
-    error_log('Unable to download Pharmacy database today');
-}
-
-echo "Pharmacies Downloaded";
+echo xlt("Pharmacies Downloaded");
 
