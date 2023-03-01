@@ -22,7 +22,7 @@ class FacilityProperties
     /**
      * @return array
      */
-    public function getFacilities()
+    public function getFacilities(): array
     {
         $sql = "select id, name, street, city, weno_id from facility";
         $list = sqlStatement($sql);
@@ -33,14 +33,16 @@ class FacilityProperties
         return $facilities_list;
     }
 
-    /**
-     * @return
-     */
-    public function updateFacilityNumber()
+    public function updateFacilityNumber(): mixed
     {
         $locations = $this->facilityupdates;
         foreach ($locations as $location) {
-            sqlQuery("update facility set weno_id = ? where id = ?", [$location[1], $location[0]]);
+            try {
+                sqlQuery("update facility set weno_id = ? where id = ?", [$location[1], $location[0]]);
+            } catch (\Exception $e) {
+                return "An error occured " . $e->getMessage();
+            }
+            return "completed";
         }
     }
 }

@@ -29,7 +29,12 @@ if ($_POST) {
         CsrfUtils::csrfNotVerified();
     }
     $data->facilityupdates = $_POST;
-    $data->updateFacilityNumber();
+    $update = $data->updateFacilityNumber();
+    if ($update == 'completed') {
+        echo "<span style='color: green'>" . xlt('Updated') . "</span>";
+    } else {
+        echo $update;
+    }
 }
 
 $facilities = $data->getFacilities();
