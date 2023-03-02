@@ -43,8 +43,8 @@ class DownloadWenoPharmacies
         if ($res === true) {
             $unzip->extractTo($storelocation);
             $unzip->close();
-            return 'complete';
         }
         unlink($storelocation.$filename);
+        return 'complete';
     }
 }
