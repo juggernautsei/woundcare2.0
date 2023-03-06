@@ -70,7 +70,7 @@ class TransmitProperties
 
         //create json array
         $wenObj = [];
-        $wenObj['UserEmail'] = $this->provider_email['email'];
+        $wenObj['UserEmail'] = $this->provider_email;
         $wenObj['MD5Password'] = md5($this->provider_pass);
         $wenObj['LocationID'] = $this->locid['weno_id'];
         $wenObj['TestPatient'] = $mode;
