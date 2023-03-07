@@ -104,11 +104,11 @@ class TransmitProperties
     public function getProviderEmail(): string
     {
         $provider_info = sqlQuery("select email from users where id = ? ", [5]);
-        if (empty($provider_info['email'])) {
+        if (empty($provider_info)) {
             echo xlt('Provider email address is missing. Go to address book to add providers email address');
             exit;
         } else {
-            return $provider_info['email'];
+            return $provider_info;
         }
     }
 

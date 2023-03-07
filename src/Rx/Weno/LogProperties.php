@@ -128,8 +128,8 @@ class LogProperties
             error_log("Cipher failure check encryption key", time());
             exit;
         }
-        //**warning** do not add urlencode to  $provider_info['email'] per Weno design
-        $urlOut = $syncLogs . $provider_info['email'] . "&data=" . urlencode($logurlparam);
+        //**warning** do not add urlencode to  $provider_info per Weno design
+        $urlOut = $syncLogs . $provider_info . "&data=" . urlencode($logurlparam);
 
         $ch = curl_init($urlOut);
         curl_setopt($ch, CURLOPT_TIMEOUT, 200);

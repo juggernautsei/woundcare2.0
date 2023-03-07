@@ -42,7 +42,7 @@ if ($urlParam == 'error') {   //check to make sure there were no errors
 </head>
 <body >
 <?php
-    //**warning** do not add urlencode to  $provider_info['email']
+    //**warning** do not add urlencode to  $provider_info
     $urlOut = $newRxUrl . $provider_info . "&data=" . urlencode($urlParam);
     //echo $urlOut; die;  //troubleshooting
     header("Location: " . $urlOut);

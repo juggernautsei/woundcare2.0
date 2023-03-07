@@ -34,6 +34,6 @@ if ($logurlparam == 'error') {
 
 $url = "https://online.wenoexchange.com/en/EPCS/RxLog?useremail=";
 
-//**warning** do not add urlencode to  $provider_info['email']
-$urlOut = $url . $provider_info['email'] . "&data=" . urlencode($logurlparam);
+//**warning** do not add urlencode to  $provider_info
+$urlOut = $url . $provider_info . "&data=" . urlencode($logurlparam);
 header("Location: " . $urlOut);
