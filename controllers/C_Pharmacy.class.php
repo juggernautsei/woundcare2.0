@@ -57,6 +57,7 @@ class C_Pharmacy extends Controller
     function import_action()
     {
         //TODO: connect to import feature
+        echo "Import!";
     }
 
     function list_action($sort = "")

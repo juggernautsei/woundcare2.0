@@ -103,6 +103,7 @@ class TransmitProperties
      */
     public function getProviderEmail(): string
     {
+        //TODO: need to determine how to figure out how is the admin
         $provider_info = sqlQuery("select email from users where id = ? ", [5]);
         if (empty($provider_info)) {
             echo xlt('Provider email address is missing. Go to address book to add providers email address');
