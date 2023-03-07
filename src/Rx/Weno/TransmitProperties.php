@@ -108,7 +108,7 @@ class TransmitProperties
             echo xlt('Provider email address is missing. Go to address book to add providers email address');
             exit;
         } else {
-            return $provider_info;
+            return $provider_info['email'];
         }
     }
 
