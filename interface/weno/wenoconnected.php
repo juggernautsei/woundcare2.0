@@ -22,23 +22,24 @@ if (!AclMain::aclCheckCore('patient', 'med')) {
     echo xlt('Pharmacy Import not authorized');
     exit;
 }
-$cryptoGen = new CryptoGen();
-$transmitProperties = new TransmitProperties();
-$localPharmacyJson = new WenoPharmaciesJson(
-    $cryptoGen,
-    $transmitProperties
-);
-error_log('Background Services launched for the Weno pharmacies');
+function start_weno_pharmacy_sync()
+{
+    $cryptoGen = new CryptoGen();
+    $transmitProperties = new TransmitProperties();
+    $localPharmacyJson = new WenoPharmaciesJson(
+        $cryptoGen,
+        $transmitProperties
+    );
+    error_log('Background Services launched for the Weno pharmacies');
 
 //check if the background service is active and set intervals to once a day
 //Weno has decided to not force the import of pharmacies since they are using the iframe
 //and the pharmacy can be selected at the time of creating the prescription.
-$value = $localPharmacyJson->checkBackgroundService();
-if ($value == 'active' || $value == 'live') {
-    $status = $localPharmacyJson->storePharmacyDataJson();
-    error_log('Weno pharmacies download complete');
-    die;
+    $value = $localPharmacyJson->checkBackgroundService();
+    if ($value == 'active' || $value == 'live') {
+        $status = $localPharmacyJson->storePharmacyDataJson();
+        error_log('Weno pharmacies download complete');
+        die;
+    }
 }
-
-echo xlt("Pharmacies Downloaded");
 
