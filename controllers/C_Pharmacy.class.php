@@ -57,7 +57,8 @@ class C_Pharmacy extends Controller
     function import_action()
     {
         //TODO: connect to import feature
-        echo "Import!";
+
+        return $this->fetch($GLOBALS['template_dir'] . "pharmacies/" . $this->template_mod . "_import.html");
     }
 
     function list_action($sort = "")
