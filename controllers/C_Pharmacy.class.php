@@ -1,6 +1,8 @@
 <?php
 
-/**
+    use OpenEMR\Pharmacy\Services\ImportPharmacies;
+
+    /**
  * C_Pharmacy class
  *
  * @package   OpenEMR
@@ -57,7 +59,10 @@ class C_Pharmacy extends Controller
     function import_action()
     {
         //TODO: connect to import feature
+        $registered = new ImportPharmacies();
 
+        //$response = $registered->importPharmacies($city, $state);
+        //$this->assign("response", $response);
         return $this->fetch($GLOBALS['template_dir'] . "pharmacies/" . $this->template_mod . "_import.html");
     }
 
@@ -95,5 +100,10 @@ class C_Pharmacy extends Controller
         //echo "action processeed";
         $_POST['process'] = "";
         header('Location:' . $GLOBALS['webroot'] . "/controller.php?" . "practice_settings&pharmacy&action=list");//Z&H
+    }
+
+    function getCityState()
+    {
+
     }
 }
