@@ -34,7 +34,7 @@ class TransmitProperties
              $this->cryptoGen = new CryptoGen();
                  $this->ncpdp = $this->getPharmacy();
                 $this->vitals = $this->getVitals();
-               $this->getPatientInfo(); //validate all info is in the patients chart
+               $this->patient = $this->getPatientInfo(); //validate all info is in the patients chart
         $this->provider_email = $this->getProviderEmail();
          $this->provider_pass = $this->getProviderPassword();
                  $this->locid = $this->getFacilityInfo();
@@ -169,6 +169,7 @@ class TransmitProperties
             if ($missing > 0) {
                 die('Pleasae add the missing data and try again');
             }
+            return $patient;
         }
     }
 
