@@ -141,7 +141,7 @@ class TransmitProperties
         //removing the call for an encounter. Just check if in a patient chart. If in a chart check patient info
         if (!empty($_SESSION['pid'])) {
             $missing = 0;
-            $vitals = getVitals();
+            $vitals = self::getVitals();
             if (is_array($vitals)) {
                 if (empty($vitals['height'])) {
                     echo xlt('Vitals - Height missing');
