@@ -34,7 +34,7 @@ class TransmitProperties
              $this->cryptoGen = new CryptoGen();
                  $this->ncpdp = $this->getPharmacy();
                 $this->vitals = $this->getVitals();
-               $this->patient = $this->getPatientInfo();
+               $this->getPatientInfo(); //validate all info is in the patients chart
         $this->provider_email = $this->getProviderEmail();
          $this->provider_pass = $this->getProviderPassword();
                  $this->locid = $this->getFacilityInfo();
@@ -49,7 +49,7 @@ class TransmitProperties
     {
         //Check if a patient chart is open. If not return void
         if (empty($_SESSION['pid'])) {
-            return;
+            return '';
         }
         //default is testing mode
         $testing = isset($GLOBALS['weno_rx_enable_test']);
@@ -115,11 +115,13 @@ class TransmitProperties
 
     public function getFacilityInfo(): mixed
     {
-        $locid = sqlQuery("select name, street, city, state, postal_code, phone, fax, weno_id from facility where id = ?", [$_SESSION['facilityId'] ?? null]);
+        $locid = sqlQuery("select name, street, city, state, postal_code, phone, fax, weno_id from facility
+                                                                   where id = ?", [$_SESSION['facilityId'] ?? null]);
 
         if (empty($locid['weno_id'])) {
             //if not in an encounter then get the first facility location id as default
-            $default_facility = sqlQuery("select name, street, city, state, postal_code, phone, fax, weno_id from facility order by id asc limit 1");
+            $default_facility = sqlQuery("select name, street, city, state, postal_code, phone, fax, weno_id from
+                                                                       facility order by id asc limit 1");
 
             if (empty($default_facility['weno_id'])) {
                 echo xlt('Facility ID is missing');
@@ -131,7 +133,7 @@ class TransmitProperties
         return $locid;
     }
 
-    private function getPatientInfo(): void
+    private function getPatientInfo()
     {
         //get patient data if in an encounter
         //Since the transmitproperties is called in the logproperties
@@ -181,6 +183,7 @@ class TransmitProperties
         if ($enc_key) {
             $key = substr(hash('sha256', $enc_key, true), 0, 32);
             $iv = $this->wenoChr();
+            file_put_contents("/var/www/html/errors/payload.txt", $this->payload);
             return base64_encode(openssl_encrypt($this->payload, $cipher, $key, OPENSSL_RAW_DATA, $iv));
         } else {
             return "error";
@@ -208,13 +211,15 @@ class TransmitProperties
      */
     private function getVitals()
     {
-        $vitals = sqlQuery("select date, height, weight from form_vitals where pid = ? ORDER BY id DESC", [$_SESSION["pid"] ?? null]);
+        $vitals = sqlQuery("select date, height, weight from form_vitals where pid = ? ORDER BY id DESC",
+            [$_SESSION["pid"] ?? null]);
         return $vitals;
     }
 
     private function getSubscriber()
     {
-        $sql = sqlQuery("select subscriber_relationship from insurance_data where pid = ? and type = 'primary'", [$_SESSION['pid'] ?? null]);
+        $sql = sqlQuery("select subscriber_relationship from insurance_data where pid = ? and type = 'primary'",
+            [$_SESSION['pid'] ?? null]);
         return $sql['subscriber_relationship'] ?? null;
     }
 
