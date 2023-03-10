@@ -65,7 +65,7 @@ class TransmitProperties
             $heightDate = explode(" ", $this->vitals['date']) ?? null;
         }
         if (is_array($this->patient)) {
-            $phoneprimary = preg_replace('/\D+/', '', $this->patient['phone_cell']) ?? null;
+            $phoneprimary = preg_replace('/\D+/', '', $this->patient['phone_home']) ?? null;
         }
 
         //create json array
