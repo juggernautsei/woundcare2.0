@@ -142,6 +142,11 @@ class TransmitProperties
         if (!empty($_SESSION['pid'])) {
             echo "<title>" . xlt('Missing Data') . "!</title>";
             $missing = 0;
+            $pharmacy = $this->getPharmacy();
+            if (empty($pharmacy)) {
+                echo xlt('Select a pharmacy for patient') . "<br>";
+                ++$missing;
+            }
             $vitals = self::getVitals();
             if (is_array($vitals)) {
                 if (empty($vitals['height'])) {
