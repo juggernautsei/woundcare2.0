@@ -8,7 +8,6 @@
  *  @license https://github.com/openemr/openemr/blob/master/LICENSE GNU General Public License 3
  */
 
-require_once ("../globals.php");
 
 use OpenEMR\Common\Acl\AclMain;
 use OpenEMR\Rx\Weno\WenoPharmaciesJson;
