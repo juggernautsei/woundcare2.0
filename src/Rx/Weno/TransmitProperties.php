@@ -156,7 +156,8 @@ class TransmitProperties
                 echo xlt('Height and Weight are missing ') . "<br>";
                 ++$missing;
             }
-            $patient = sqlQuery("select title, fname, lname, mname, street, state, city, email, phone_cell, postal_code, dob, sex, pid from patient_data where pid=?", [$_SESSION['pid']]);
+            $patient = sqlQuery("select title, fname, lname, mname, street, state, city, email,
+       phone_home, postal_code, dob, sex, pid from patient_data where pid=?", [$_SESSION['pid']]);
             if (empty($patient['fname'])) {
                 echo xlt("First Name Missing") . "<br>";
                 ++$missing;
@@ -174,11 +175,15 @@ class TransmitProperties
                 ++$missing;
             }
             if (empty($patient['postal_code'])) {
-                echo xlt("Zip Code Missing") . "<br>";
+                echo xlt("Zip Code is Missing") . "<br>";
                 ++$missing;
             }
             if (empty($patient['street'])) {
-                echo xlt("Street Address incomplete Missing") . "<br>";
+                echo xlt("Street Address is incomplete Missing") . "<br>";
+                ++$missing;
+            }
+            if (empty($patient['phone_home'])) {
+                echo xlt("Home Phone number is incomplete Missing") . "<br>";
                 ++$missing;
             }
             if ($missing > 0) {
