@@ -144,15 +144,15 @@ class TransmitProperties
             $vitals = self::getVitals();
             if (is_array($vitals)) {
                 if (empty($vitals['height'])) {
-                    echo xlt('Vitals - Height missing');
+                    echo xlt('Vitals - Height missing ') . "<br>";
                     ++$missing;
                 }
                 if (empty($vitals['weight'])) {
-                    echo xlt('Vitals - Weight missing');
+                    echo xlt('Vitals - Weight missing ') . "<br>";
                     ++$missing;
                 }
             } else {
-                echo xlt('Height and Weight are missing');
+                echo xlt('Height and Weight are missing ') . "<br>";
                 ++$missing;
             }
             $patient = sqlQuery("select title, fname, lname, mname, street, state, city, email, phone_cell, postal_code, dob, sex, pid from patient_data where pid=?", [$_SESSION['pid']]);
