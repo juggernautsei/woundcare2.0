@@ -141,6 +141,20 @@ class TransmitProperties
         //removing the call for an encounter. Just check if in a patient chart. If in a chart check patient info
         if (!empty($_SESSION['pid'])) {
             $missing = 0;
+            $vitals = getVitals();
+            if (is_array($vitals)) {
+                if (empty($vitals['height'])) {
+                    echo xlt('Vitals - Height missing');
+                    ++$missing;
+                }
+                if (empty($vitals['weight'])) {
+                    echo xlt('Vitals - Weight missing');
+                    ++$missing;
+                }
+            } else {
+                echo xlt('Height and Weight are missing');
+                ++$missing;
+            }
             $patient = sqlQuery("select title, fname, lname, mname, street, state, city, email, phone_cell, postal_code, dob, sex, pid from patient_data where pid=?", [$_SESSION['pid']]);
             if (empty($patient['fname'])) {
                 echo xlt("First Name Missing") . "<br>";
