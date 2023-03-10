@@ -140,6 +140,7 @@ class TransmitProperties
         //need to check to see if in an encounter or not. Patient data is not required to view the Weno log
         //removing the call for an encounter. Just check if in a patient chart. If in a chart check patient info
         if (!empty($_SESSION['pid'])) {
+            echo "<title>" . xlt('Missing Data') . "!</title>";
             $missing = 0;
             $vitals = self::getVitals();
             if (is_array($vitals)) {
