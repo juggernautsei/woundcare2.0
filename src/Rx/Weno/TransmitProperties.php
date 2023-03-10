@@ -204,7 +204,6 @@ class TransmitProperties
         if ($enc_key) {
             $key = substr(hash('sha256', $enc_key, true), 0, 32);
             $iv = $this->wenoChr();
-            file_put_contents("/var/www/html/dumps/payload.txt", $this->payload);
             return base64_encode(openssl_encrypt($this->payload, $cipher, $key, OPENSSL_RAW_DATA, $iv));
         } else {
             return "error";
