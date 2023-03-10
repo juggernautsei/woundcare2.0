@@ -40,4 +40,3 @@ function start_weno_pharmacy_sync()
     }
 }
 
-    start_weno_pharmacy_sync();
